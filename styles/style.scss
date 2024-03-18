@@ -1,0 +1,462 @@
+// ファイルのインポート
+@import "base";
+@import "font";
+@import "color";
+
+// ボディ
+body {
+  color: $textGray;
+  background-color: $bgAliceBlue;
+  font-family: $fontNotoSans;
+}
+
+// ヘッダー
+.todo-header {
+  text-align: center;
+
+  img {
+    width: 25rem;
+  }
+}
+
+// タスクエントリー、タスクリスト
+.todo-entry,
+.todo-list {
+  margin: 2rem 1.5rem 5rem;
+
+  .text-en {
+    font-size: 3rem;
+    font-weight: 400;
+    font-family: $fontPoppins;
+    margin-bottom: 2rem;
+  }
+
+  .text-jp {
+    font-size: 1.8rem;
+  }
+
+  .category {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // 入力欄とボタン
+  input,
+  button {
+    font-size: 1.6rem;
+    outline: none;
+    border: 0.1rem solid $borderGrayLight;
+    border-radius: 0.5rem;
+    background-color: $white;
+  }
+
+  input {
+    padding: 0.8rem;
+  }
+
+  input:focus {
+    outline: none;
+    border: 0.1rem solid $borderGrayDark;
+  }
+
+  button {
+    color: $white;
+    cursor: pointer;
+  }
+
+  #todo-form {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  // カテゴリードロップダウン
+  #category-dropdown {
+    color: $textGray;
+    font-size: 1.8rem;
+    margin-block: 0.5rem;
+    padding: 0.5rem;
+    outline: none;
+    border: 0.1rem solid $borderGrayLight;
+    border-radius: 0.5rem;
+    background-color: $white;
+  }
+
+  #category-dropdown {
+    width: 20rem;
+  }
+
+  #category-dropdown:hover {
+    border: 0.1rem solid $borderGrayDark;
+  }
+
+  // 入力フォーム
+  .add-input {
+    margin: 0 0.5rem 0.5rem 0;
+    display: grid;
+    grid-template-columns: 1fr 4.2rem;
+    grid-column-gap: 0.5rem;
+  }
+
+  #content {
+    padding-left: 1.2rem;
+  }
+
+  #content:hover,
+  button:hover {
+    border: 0.1rem solid $borderGrayDark;
+  }
+
+  // ボタン
+  #add-btn-plus,
+  .edit-btn,
+  .del-btn-minus {
+    font-size: 2.4rem;
+    font-family: $fontPoppins;
+    width: 4.2rem;
+    height: 4.2rem;
+  }
+
+  #add-btn-plus,
+  #add-btn-jp,
+  #category-btn {
+    background-color: $darkcyan;
+  }
+
+  .del-btn-minus,
+  .del-btn-jp,
+  #done-clear-btn,
+  #all-clear-btn {
+    background-color: $rose;
+  }
+
+  #add-btn-jp,
+  .del-btn-jp {
+    display: none;
+  }
+
+  .star-btn,
+  .category-del-btn {
+    border: none;
+
+    &:hover {
+      border: none;
+    }
+  }
+}
+
+#category-btn,
+#done-clear-btn,
+#all-clear-btn {
+  width: 20rem;
+  padding: 1rem;
+}
+
+#done-clear-btn {
+  margin-bottom: 0.5rem;
+}
+
+.button-container {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+// ペンと星のアイコンスタイル
+.fa-pen,
+.fa-star,
+.fa-square-xmark {
+  color: $textGray;
+}
+
+.fa-star,
+.fa-square-xmark {
+  font-size: 2.4rem;
+  padding-right: 0.5rem;
+}
+
+.fa-square-xmark {
+  font-size: 2rem;
+  padding-left: 0.5rem;
+  &:hover {
+color: $rose;
+  }
+}
+
+.categoryTitle {
+  font-size: 2.3rem;
+}
+
+.fa-folder-closed {
+  font-size: 1.9rem;
+  margin-right: 0.3rem;
+}
+
+// タスクアイテムコンテナ
+#todo-items {
+  .completed {
+    span,
+    .edit-input {
+      color: $gray;
+      text-decoration: line-through;
+    }
+  }
+
+  li {
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    outline: none;
+    border: 0.1rem solid $borderGrayLight;
+    border-radius: 0.5rem;
+    background-color: $white;
+
+    .checkbox {
+      accent-color: $textGray;
+      width: 1.7rem;
+      height: 1.7rem;
+      margin: 1rem;
+      cursor: pointer;
+    }
+
+    .list-buttons {
+      display: flex;
+      margin: 0.5rem 0.5rem 0.5rem auto;
+      gap: 0.5rem;
+    }
+
+    input {
+      border: none;
+      background: none;
+      padding: 0;
+    }
+  }
+}
+
+// モーダル
+.modal {
+  background-color: $white;
+  width: 90vw;
+  height: 15rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 3rem rgba(0, 0, 0, 0.7);
+
+  position: absolute;
+  top: 13rem;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: transform 0.8s ease-in-out;
+  z-index: 1;
+
+  .content-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+
+    img {
+      width: 5rem;
+    }
+
+    p {
+      font-size: 2rem;
+      text-align: center;
+      margin: 2rem 0;
+      color: $rose;
+    }
+  }
+
+  .modal-btn {
+    text-align: center;
+    align-items: center;
+  }
+
+  button {
+    font-size: 1.7rem;
+    font-family: $fontPoppins;
+    width: 9rem;
+    height: 3.5rem;
+    margin: 0.2rem;
+
+    outline: none;
+    border: 0.1rem solid $borderGrayLight;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+
+  #confirm-btn {
+    color: $white;
+    background-color: $darkcyan;
+  }
+
+  #confirm-btn:hover {
+    border: 0.1rem solid $borderGrayDark;
+  }
+
+  #cancel-btn {
+    color: $textGray;
+    border: none;
+  }
+
+  #cancel-btn:hover {
+    border: 0.1rem solid $borderGrayLight;
+  }
+}
+
+// カテゴリーモーダル
+.category-modal {
+  height: 25rem;
+
+  .content-row,
+  .category-input {
+    margin-bottom: 2rem;
+  }
+
+  #new-category-input {
+    color: $textGray;
+    font-size: 1.8rem;
+    margin-block: 0.5rem;
+    padding: 0.5rem;
+    outline: none;
+    border: 0.1rem solid $borderGrayLight;
+    border-radius: 0.5rem;
+    background-color: $white;
+  }
+
+  .category-input {
+    width: 30rem;
+  }
+
+  .category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .category-input {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  #new-category-input {
+    width: 100%;
+    padding-left: 1rem;
+  }
+
+  #new-category-input:hover {
+    border: 0.1rem solid $borderGrayDark;
+  }
+
+  #new-category-input:focus {
+    outline: none;
+    border: 0.1rem solid $borderGrayDark;
+  }
+
+  .category-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #category-plus-btn {
+    width: 3rem;
+    border: none;
+    background-color: $white;
+  }
+
+  .fa-square-plus {
+    color: $textGray;
+    font-size: 3.6rem;
+    display: flex;
+    align-items: center;
+  }
+}
+
+// オーバーレイ
+.overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// メディアクエリ
+@media screen and (min-width: 768px) {
+  .todo-entry,
+  .todo-list {
+    width: 60vw;
+    margin: 0 auto 5rem;
+  }
+
+  .modal {
+    width: 40rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .todo-entry,
+  .todo-list {
+    width: 40vw;
+    margin: 0 auto 5rem;
+
+    input,
+    button {
+      font-size: 1.8rem;
+    }
+
+    .add-input {
+      display: grid;
+      grid-template-columns: 1fr 8.4rem;
+      grid-column-gap: 0.5rem;
+    }
+
+    #add-btn-plus,
+    .del-btn-minus {
+      display: none;
+    }
+
+    #add-btn-jp,
+    .del-btn-jp {
+      display: block;
+      width: 8.4rem;
+      height: 4.8rem;
+      position: relative;
+    }
+
+    #add-btn-jp::after,
+    .del-btn-jp::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .edit-btn,
+    .star-btn {
+      height: 4.8rem;
+    }
+
+    .edit-btn {
+      width: 4.8rem;
+    }
+
+    .fa-pen,
+    .fa-star {
+      font-size: 2.5rem;
+    }
+  }
+
+  .modal {
+    width: 40rem;
+  }
+}
