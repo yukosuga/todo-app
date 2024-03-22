@@ -14,6 +14,32 @@ import {
 let todos = the_todos;
 let categories = the_categories;
 
+const createCategoryDropdown = () => {
+  const categoryDropdown = document.createElement("select");
+  categoryDropdown.id = "category-dropdown";
+
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.selected = true;
+  defaultOption.textContent = "---";
+  categoryDropdown.appendChild(defaultOption);
+
+  categories.forEach((category) => {
+    if (!category) return;
+    const option = document.createElement("option");
+    option.value = category;
+    option.textContent = category;
+    categoryDropdown.appendChild(option);
+  });
+  return categoryDropdown;
+};
+
+const categoryDropdownLabel = document.getElementById(
+  "category-dropdown-label"
+);
+const categoryDropdown = createCategoryDropdown(categories);
+categoryDropdownLabel.appendChild(categoryDropdown);
+
 const createCategoryContainer = (category) => {
   const todoItems = document.querySelector("#todo-items");
   const container = document.createElement("ul");
@@ -138,10 +164,10 @@ const renderTodo = (todo) => {
     deleteButtonHandler(li, todo);
   });
 
-  const deleteButtonJp = document.createElement("button");
-  deleteButtonJp.textContent = "Delete";
-  deleteButtonJp.classList.add("del-btn-jp");
-  deleteButtonJp.addEventListener("click", () => {
+  const deleteButtonEN = document.createElement("button");
+  deleteButtonEN.textContent = "Delete";
+  deleteButtonEN.classList.add("del-btn-en");
+  deleteButtonEN.addEventListener("click", () => {
     deleteButtonHandler(li, todo);
   });
 
@@ -167,7 +193,7 @@ const renderTodo = (todo) => {
   listButtons.appendChild(starButton);
   listButtons.appendChild(editButton);
   listButtons.appendChild(deleteButton);
-  listButtons.appendChild(deleteButtonJp);
+  listButtons.appendChild(deleteButtonEN);
 
   li.appendChild(label);
   li.appendChild(listButtons);
@@ -228,7 +254,6 @@ document.querySelector("#todo-form").addEventListener("submit", (e) => {
 
   document.querySelector("#category-dropdown").value = "";
 });
-selectedCategory;
 
 document.querySelector("#done-clear-btn").addEventListener("click", () => {
   const completedTasks = todos.filter((todo) => todo.isCompleted);
@@ -270,9 +295,30 @@ document.addEventListener("click", (e) => {
 
       todos = todos.filter((todo) => todo.category !== categoryToRemove);
       saveTodos(todos);
+
+      updateCategoryDropdown();
     });
   }
 });
+
+const updateCategoryDropdown = () => {
+  const categoryDropdown = document.getElementById("category-dropdown");
+  categoryDropdown.innerHTML = "";
+
+  categories.forEach((category) => {
+    if (!category) return;
+    const option = document.createElement("option");
+    option.value = category;
+    option.textContent = category;
+    categoryDropdown.appendChild(option);
+  });
+
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.selected = true;
+  defaultOption.textContent = "---";
+  categoryDropdown.appendChild(defaultOption);
+};
 
 document.querySelector("#all-clear-btn").addEventListener("click", () => {
   document.querySelectorAll("#todo-items li").forEach((li) => {
@@ -287,29 +333,8 @@ document.querySelector("#all-clear-btn").addEventListener("click", () => {
 
   saveTodos(todos);
   saveCategories(categories);
+  updateCategoryDropdown();
 });
-
-const categoryDropdown = document.createElement("select");
-categoryDropdown.id = "category-dropdown";
-
-const defaultOption = document.createElement("option");
-defaultOption.value = "";
-defaultOption.selected = true;
-defaultOption.textContent = "---";
-categoryDropdown.appendChild(defaultOption);
-
-categories.forEach((category) => {
-  if (!category) return;
-  const option = document.createElement("option");
-  option.value = category;
-  option.textContent = category;
-  categoryDropdown.appendChild(option);
-});
-
-const categoryDropdownLabel = document.getElementById(
-  "category-dropdown-label"
-);
-categoryDropdownLabel.appendChild(categoryDropdown);
 
 document.getElementById("category-btn").addEventListener("click", () => {
   createCategoryModal(categories, (selectedCategory) => {

@@ -1,16 +1,13 @@
-// ファイルのインポート
 @import "base";
 @import "font";
 @import "color";
 
-// ボディ
 body {
   color: $textGray;
   background-color: $bgAliceBlue;
   font-family: $fontNotoSans;
 }
 
-// ヘッダー
 .todo-header {
   text-align: center;
 
@@ -19,7 +16,6 @@ body {
   }
 }
 
-// タスクエントリー、タスクリスト
 .todo-entry,
 .todo-list {
   margin: 2rem 1.5rem 5rem;
@@ -31,16 +27,11 @@ body {
     margin-bottom: 2rem;
   }
 
-  .text-jp {
-    font-size: 1.8rem;
-  }
-
   .category {
     display: flex;
     flex-direction: column;
   }
 
-  // 入力欄とボタン
   input,
   button {
     font-size: 1.6rem;
@@ -70,7 +61,6 @@ body {
     flex-direction: column-reverse;
   }
 
-  // カテゴリードロップダウン
   #category-dropdown {
     color: $textGray;
     font-size: 1.8rem;
@@ -90,7 +80,6 @@ body {
     border: 0.1rem solid $borderGrayDark;
   }
 
-  // 入力フォーム
   .add-input {
     margin: 0 0.5rem 0.5rem 0;
     display: grid;
@@ -107,7 +96,6 @@ body {
     border: 0.1rem solid $borderGrayDark;
   }
 
-  // ボタン
   #add-btn-plus,
   .edit-btn,
   .del-btn-minus {
@@ -118,20 +106,20 @@ body {
   }
 
   #add-btn-plus,
-  #add-btn-jp,
+  #add-btn-en,
   #category-btn {
     background-color: $darkcyan;
   }
 
   .del-btn-minus,
-  .del-btn-jp,
+  .del-btn-en,
   #done-clear-btn,
   #all-clear-btn {
     background-color: $rose;
   }
 
-  #add-btn-jp,
-  .del-btn-jp {
+  #add-btn-en,
+  .del-btn-en {
     display: none;
   }
 
@@ -162,7 +150,6 @@ body {
   flex-direction: column;
 }
 
-// ペンと星のアイコンスタイル
 .fa-pen,
 .fa-star,
 .fa-square-xmark {
@@ -192,7 +179,6 @@ color: $rose;
   margin-right: 0.3rem;
 }
 
-// タスクアイテムコンテナ
 #todo-items {
   .completed {
     span,
@@ -235,7 +221,6 @@ color: $rose;
   }
 }
 
-// モーダル
 .modal {
   background-color: $white;
   width: 90vw;
@@ -306,7 +291,6 @@ color: $rose;
   }
 }
 
-// カテゴリーモーダル
 .category-modal {
   height: 25rem;
 
@@ -377,7 +361,6 @@ color: $rose;
   }
 }
 
-// オーバーレイ
 .overlay {
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
@@ -390,7 +373,6 @@ color: $rose;
   align-items: center;
 }
 
-// メディアクエリ
 @media screen and (min-width: 768px) {
   .todo-entry,
   .todo-list {
@@ -425,16 +407,16 @@ color: $rose;
       display: none;
     }
 
-    #add-btn-jp,
-    .del-btn-jp {
+    #add-btn-en,
+    .del-btn-en {
       display: block;
       width: 8.4rem;
       height: 4.8rem;
       position: relative;
     }
 
-    #add-btn-jp::after,
-    .del-btn-jp::after {
+    #add-btn-en::after,
+    .del-btn-en::after {
       position: absolute;
       top: 50%;
       left: 50%;
